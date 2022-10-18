@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import userRoutes from './routes/users.js'
+import eventRoutes from './routes/events.js'
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: "true" }));
 app.use(cors());
 
 app.use('/createUser', userRoutes)
+app.use('/event', eventRoutes)
 
 const PORT = process.env.PORT || 3005;
 const CONNECTION_URL =

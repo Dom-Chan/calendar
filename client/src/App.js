@@ -1,26 +1,19 @@
 import "./App.css";
 import React from "react";
+import NewUser from "./Components/NewUser";
+import Calendar from "./Components/Calendar";
+import { format, startOfToday  } from "date-fns";
+import NewEvent from "./Components/NewEvent";
 
 
 function App() {
-  const createUser = () => {
-    console.log("creating user...");
-    fetch(`http://localhost:3005/createUser`, {
-      method: "POST",
-      body: JSON.stringify({
-        username: "domchan",
-        name: "Do Chan",
-        events: ["aaa", "dddd"],
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).catch((err) => console.log(err));
-  };
+  let todayDate = startOfToday()
 
   return (
-    <div onClick={createUser} className="">
-      dchan
+    <div>
+      <NewUser/>
+      <Calendar eventDate={todayDate}/>
+      <NewEvent/>
     </div>
   );
 }
