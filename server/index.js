@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: "true" }));
 app.use(cors());
 
-app.use('/createUser', userRoutes)
+app.use('/user', userRoutes)
 app.use('/event', eventRoutes)
 
 const PORT = process.env.PORT || 3005;
