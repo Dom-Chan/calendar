@@ -24,6 +24,7 @@ const Calendar = ({ eventDate }) => {
   const [selectedEvent, setSelectedEvent] = useState();
   const [events, setEvents] = useState();
   const [createEventModal, setCreateEventModal] = useState(false);
+ 
   let create = "create";
   let edit = "edit";
   let firstDayofCurMonth = parse(currentMonth, "MMMM yyyy", new Date());
@@ -34,6 +35,7 @@ const Calendar = ({ eventDate }) => {
   });
 
   useEffect(() => {
+    
     fetch(`http://localhost:3005/event/`, {
       method: "GET",
       headers: {
@@ -45,7 +47,7 @@ const Calendar = ({ eventDate }) => {
         setEvents(res_events);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [selectedDate]);
 
   const deleteEvent = ({ event }) => {
     let _id = event._id;
@@ -116,16 +118,17 @@ const Calendar = ({ eventDate }) => {
                 >
                   {format(day, "d")}
                 </button>
-                {events && events.some((event) =>
-                  isSameDay(parseISO(event.startDate), day)
-                ) && <div className="w-1 h-1 bg-secondary mx-auto"></div>}
+                {events &&
+                  events.some((event) =>
+                    isSameDay(parseISO(event.startDate), day)
+                  ) && <div className="w-1 h-1 bg-secondary mx-auto"></div>}
               </div>
             ))}
           </div>
         </div>
       </div>
       {/* DISPLAY EVENTS HERE */}
-      <div className="flex flex-col max-w-md p-5">
+      <div className="flex flex-col w-64 max-w-md p-5">
         <div className="max-w-md flex flex-col rounded-md p-3 mb-2">
           {events &&
             selectedDate &&
@@ -159,14 +162,8 @@ const Calendar = ({ eventDate }) => {
                 </div>
               ))}
         </div>
-
-        <button
-          className="rounded-md p-2 max-w-max bg-secondaryShade self-end"
-          onClick={() => setCreateEventModal(true)}
-        >
-          Create Event
-        </button>
       </div>
+      
       {selectedEventModal && (
         <NewEvent
           setCreateEventModal={setSelectedEventModal}

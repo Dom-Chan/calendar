@@ -185,6 +185,7 @@ const NewEvent = ({ setCreateEventModal, instruction, event }) => {
           <button
             className="bg-primary text-white rounded-md w-full mt-1"
             onClick={() => {
+            
               if (instruction === "create") {
                 createEvent({ eventStart, eventEnd, selectedUsers });
               } else editEvent({ eventStart, eventEnd, selectedUsers });
