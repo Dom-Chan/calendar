@@ -13,16 +13,15 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: "true" }));
 app.use(cors());
+dotenv.config()
 
 app.use('/user', userRoutes)
 app.use('/event', eventRoutes)
 
 const PORT = process.env.PORT || 3005;
-const CONNECTION_URL =
-  'mongodb+srv://dc_dev:DCdevelopment22@cluster0.s6tfohe.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose
-  .connect(CONNECTION_URL)
+  .connect(process.env.CONNECTION_URL)
   .then(() =>
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
   )
